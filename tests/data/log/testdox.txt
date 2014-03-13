@@ -1,14 +1,17 @@
+UserControllerProfileController
+ [x] If instance of
+ [x] If edit action is accessible
+ [x] If edit action is throwing exception if dont receive params
+ [x] If is obtaining existent user
+ [x] If edit is saving as expected
+ [x] If edit is doing nothing on invalid method data
+
 UserControllerRegisterController
  [x] If can access index action
  [x] If form was setted
  [x] Send valid post to index
  [x] Send invalid post to index
  [x] If has inputs on view
- [x] If edit action is accessible
- [x] If edit action is throwing exception if dont receive params
- [x] If is obtaining existent user
- [x] If edit is saving as expected
- [x] If edit is doing nothing on invalid method data
 
 UserEntityUserDetail
  [x] Class exists

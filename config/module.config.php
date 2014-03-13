@@ -33,8 +33,8 @@ return array(
                         'id' => '[0-9]+'
                     ),
                     'defaults' => array(
-                        'controller' => 'register',
-                        'action' => 'edit'
+                        'controller' => 'profile',
+                        'action' => 'index'
                     )
                 )
             ),
@@ -42,7 +42,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'register' => 'User\Controller\RegisterController'
+            'register' => 'User\Controller\RegisterController',
+            'profile' => 'User\Controller\ProfileController'
         ),
     ),
     'service_manager' => array(
