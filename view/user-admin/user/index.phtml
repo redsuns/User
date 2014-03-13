@@ -1,0 +1,42 @@
+<h2>Usuários</h2>
+
+<a href="<?php echo $this->url('admin-internals',  array('controller' => 'users', 'action' => 'add')); ?>">Adicionar Usuário</a>
+<br /><br />
+
+<?php
+$items = '';
+foreach($users as $user) {
+    $items .= $user->getName() . ' - ';
+    $items .= '<a href="' . $this->url('admin-internals',
+            array('controller' => 'roles', 'action' => 'index'))
+        . '">'.$user->getRole()->getName().'</a>';
+    $items .= ' - ';
+    $items .= '<a href="' . $this->url('admin-internals',
+            array('controller' => 'users', 'action' => 'edit', 'id' => $user->getId()))
+        . '">Editar Usuário</a>';
+    $items .= ' - ';
+
+
+    $form = $this->form;
+    $form->setAttribute('action', $this->url('admin-internals', array('controller' => 'users', 'action' => 'delete')));
+    $form->prepare();
+
+    $form->setAttribute('class', 'stdform');
+    $form->setAttribute('id', $user->getId());
+    $form->setAttribute('role', 'form');
+
+    $items .= $this->form()->openTag($form);
+
+    $element = $this->elementHidden->setName('id');
+    $element->setValue($user->getId());
+
+    $items .= $this->formHidden($element);
+
+    $items .= $this->formButton($form->get('submit'));
+    $items .= $this->form()->closeTag();
+
+
+    $items .= '<br />';
+}
+
+echo $items;

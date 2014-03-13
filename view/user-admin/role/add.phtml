@@ -1,0 +1,55 @@
+<h2>Adicionando Função</h2>
+
+<?php 
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('class', 'stdform');
+$form->setAttribute('role', 'form');
+echo $this->form()->openTag($form); 
+?>
+
+<!-------------------------------------------------------------->
+<?php $erros = $form->get('name')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+        <?php echo $this->formLabel($form->get('name')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('name')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+<?php endif; ?>  
+
+    </div>
+</div>
+<!-------------------------------------------------------------->
+
+<br /><br />
+
+<!-------------------------------------------------------------->
+<?php $erros = $form->get('description')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+        <?php echo $this->formLabel($form->get('description')); ?>
+    <div class="controls">
+        <?php echo $this->formTextarea($form->get('description')); ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+<?php endif; ?>  
+
+    </div>
+</div>
+<!-------------------------------------------------------------->
+
+<p class="stdformbutton">
+    <?php echo $this->formButton($form->get('submit')); ?>
+</p>
+               
+<?php echo $this->form()->closeTag(); ?>

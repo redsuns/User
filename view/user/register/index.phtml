@@ -1,0 +1,223 @@
+<?php
+$form = $this->form;
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+
+<?php $erros = $form->get('name')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('name')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('name')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+<?php $erros = $form->get('email')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('email')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('email')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+<?php $erros = $form->get('password')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('password')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('password')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+
+<?php $erros = $form->get('password_confirm')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('password_confirm')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('password_confirm')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+<?php $erros = $form->get('phone')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('phone')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('phone')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+<?php $erros = $form->get('cpf')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('cpf')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('cpf')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+<div class="par control-group bloco">
+    <?php echo $this->formLabel($form->get('rg')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('rg')) ?>
+    </div>
+</div>
+
+<?php $erros = $form->get('address')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('address')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('address')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+<?php $erros = $form->get('address_number')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('address_number')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('address_number')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+
+<div class="par control-group bloco">
+    <?php echo $this->formLabel($form->get('address_complement')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('address_complement')) ?>
+    </div>
+</div>
+
+<?php $erros = $form->get('district')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('district')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('district')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+<?php $erros = $form->get('city')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('city')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('city')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+<?php $erros = $form->get('state')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('state')) ?>
+    <div class="controls">
+        <?php echo $this->formSelect($form->get('state')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+<?php $erros = $form->get('cep')->getMessages(); ?> 
+<?php $numErros = count($erros); ?>
+<div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+    <?php echo $this->formLabel($form->get('cep')) ?>
+    <div class="controls">
+        <?php echo $this->formInput($form->get('cep')) ?>
+
+        <?php if ($numErros > 0): ?>
+            <?php foreach ($erros as $chave => $msg): ?>
+                <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+            <?php endforeach; ?>
+        <?php endif; ?>  
+
+    </div>
+</div>
+
+
+<p class="stdformbutton">
+    <?php echo $this->formSubmit($form->get('submit')); ?>
+</p>
+
+<?php
+echo $this->form()->closeTag();

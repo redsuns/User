@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="Bootstrap.php" colors="true" verbose="true">
+    <testsuites>
+        <testsuite name="User">
+            <directory>./</directory>
+        </testsuite>
+    </testsuites>
+    
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../src</directory>
+            <directory suffix=".phtml">../view</directory>
+            <exclude>
+                <directory suffix=".php">../tests/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <groups>
+        <include>
+            <group>User</group>
+        </include>
+    </groups>
+    
+</phpunit>

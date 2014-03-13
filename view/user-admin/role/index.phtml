@@ -1,0 +1,41 @@
+<h2>Admin Roles Index</h2>
+<a href="<?php echo $this->url('admin-internals',
+        array('controller' => 'roles', 'action' => 'add')); ?>">
+    Cadastrar função
+</a>
+
+<br />
+<?php
+    $items = '';
+    foreach($roles as $role) {
+        $items .= $role;
+        $items .= ' - ';
+        $items .= '<a href="' . $this->url('admin-internals',
+                    array('controller' => 'roles', 'action' => 'edit', 'id' => $role->getId()))
+            . '">Editar função</a>';
+        $items .= ' - ';
+
+
+        $form = $this->form;
+        $form->setAttribute('action', $this->url('admin-internals', array('controller' => 'roles', 'action' => 'delete')));
+        $form->prepare();
+
+        $form->setAttribute('class', 'stdform');
+        $form->setAttribute('id', $role->getId());
+        $form->setAttribute('role', 'form');
+
+        $items .= $this->form()->openTag($form);
+
+        $element = $this->elementHidden->setName('id');
+        $element->setValue($role->getId());
+
+        $items .= $this->formHidden($element);
+
+        $items .= $this->formButton($form->get('submit'));
+        $items .= $this->form()->closeTag();
+
+
+        $items .= '<br />';
+    }
+
+echo $items;

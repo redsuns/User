@@ -1,0 +1,61 @@
+UserControllerRegisterController
+ [x] If can access index action
+ [x] If form was setted
+ [x] Send valid post to index
+ [x] Send invalid post to index
+ [x] If has inputs on view
+
+UserEntityUserDetail
+ [x] Class exists
+ [x] Method to array exists
+ [x] Method to string exists
+ [x] If is setting data as expected
+ [x] If is returning as array
+ [x] If is returning as string
+
+UserEntityUser
+ [x] Class exists
+ [x] Method to array exists
+ [x] Method to string exists
+ [x] If is setting data as expected
+ [x] If is returning as array
+ [x] If is returning as string
+
+UserFormRegister
+ [x] Exists class
+ [x] If class is a sub class of zend form
+ [x] Form fields
+ [x] Attributs are mirrored
+ [x] If complete data are valid
+ [x] If complete data are invalid
+ [x] If unmatched passowrd are returning false
+ [x] If is rejecting not range length password
+ [x] If invalid data is returning messages
+ [x] If is requiring phone number
+ [x] If is requiring cpf
+ [x] If is requiring address
+ [x] If is requiring address number
+ [x] If is requiring district
+ [x] If is requiring city
+ [x] If is requiring state
+ [x] If is requiring cep
+
+UserServiceUserDetail
+ [x] Instance of
+ [x] If has method save
+ [x] If has method set user
+ [x] If is throwing exception on receive an empty array as param
+ [x] If is saving as expected
+
+UserServiceUser
+ [x] Instance of
+ [x] If has method count
+ [x] If method count is returning an int
+ [x] If has method save
+ [x] If save is requiring params
+ [x] If is saving as expected
+ [x] If isdeleting as expected
+ [x] If has method inactivate profile
+ [x] If inactivate is throwing exception on invalid id
+ [x] If is inactivating as expected
+
