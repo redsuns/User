@@ -24,12 +24,24 @@ return array(
                         'action' => 'index'
                     )
                 )
-            )
+            ),
+            'editar-perfil' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/editar-perfil/[:id]',
+                    'constraints' => array(
+                        'id' => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'register',
+                        'action' => 'edit'
+                    )
+                )
+            ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'user' => 'User\Controller\RoleController',
             'register' => 'User\Controller\RegisterController'
         ),
     ),

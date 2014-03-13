@@ -32,7 +32,7 @@ class UserDetail extends AbstractService
      * @return boolean
      * @throws \InvalidArgumentException
      */
-    public function persistDetails( array $data )
+    public function linkDetails( array $data )
     {
         if ( empty($data) ) {
             throw new \InvalidArgumentException('Nenhum dado recebido');
@@ -53,6 +53,40 @@ class UserDetail extends AbstractService
         }
         
         return true;
+    }
+    
+    /**
+     * 
+     * @param array $details
+     * @param array $edited
+     * @return boolean
+     */
+    public function persistDetails( $details, array $edited )
+    {
+        foreach($details as $detail) {
+            if ( array_key_exists($detail->getField(), $edited) ) {
+                $detail->setValue($edited[$detail->getField()]);
+                
+                $this->em->persist($detail);
+            }
+        }
+        
+        return true;
+    }
+    
+    /**
+     * 
+     * @param array $details
+     * @return array
+     */
+    public function parseDetails( $details )
+    {
+        $items = array();
+        foreach($details as $detail) {
+            $items[$detail->getField()] = $detail->getValue();
+        }
+        
+        return $items;
     }
     
 }

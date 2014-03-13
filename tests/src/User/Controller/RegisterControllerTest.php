@@ -7,15 +7,20 @@ use Zend\Http\Request as HttpRequest;
 use User\Bootstrap;
 use Base\Controller\TestCaseController;
 use Mockery;
+use User\Asset\UserAsset;
+use User\Asset\UserDetailAsset;
 
 /**
  * @group User
  */
 class RegisterControllerTest extends TestCaseController
 {
+    protected $asset;
+    
     public function setUp()
     {
         $this->setApplicationConfig(Bootstrap::getConfig());
+        $this->asset = new UserAsset();
         
         parent::setUp();
         
@@ -24,33 +29,29 @@ class RegisterControllerTest extends TestCaseController
     
     public function smMock()
     {
+        $detailAsset = new UserDetailAsset();
+        
+        $userData = new \User\Entity\User($this->asset->getData());
+        $details = $detailAsset->detailsToUser($userData);
+        
+        $userData->setDetail($details);
+        
         $userService = Mockery::mock('User\Service\User');
         $userService->shouldReceive('save')->andReturn(true);
-     
+        $userService->shouldReceive('edit')->andReturn(true);
+        $userService->shouldReceive('read')->with(1)->andReturn($userData);
+        
+        
+        $userDetailService = Mockery::mock('User\Service\UserDetail');
+        $userDetailService->shouldReceive('read')->with(1)->andReturn($userData);
+        $userDetailService->shouldReceive('parseDetails')->andReturn($detailAsset->detailsToArray());
+        
         $serviceManager = $this->getApplicationServiceLocator();
         $serviceManager->setAllowOverride(true);
         $serviceManager->setService('User\Service\User', $userService);
-        return $userService;
+        $serviceManager->setService('User\Service\UserDetail', $userDetailService);
     }
     
-    public function userData()
-    {
-        return [
-            'name' => 'teste',
-            'email' => 'teste@teste.com',
-            'password' => '123456789',
-            'password_confirm' => '123456789',
-            'phone' => '(41) 3333-3333',
-            'cpf' => '000.000.000-00',
-            'address' => 'Rua teste',
-            'address_number' => 12334,
-            'address_complement' => 'teste',
-            'district' => 'teste',
-            'city' => 'teste',
-            'state' => 'PR',
-            'cep' => '82.899-899'
-        ];
-    }
     
     public function testIfCanAccessIndexAction() 
     {   
@@ -84,7 +85,7 @@ class RegisterControllerTest extends TestCaseController
     
     public function testSendValidPostToIndex() 
     {   
-        $post = $this->userData();
+        $post = $this->asset->getData();
         
         $this->dispatch('/cadastre-se', HttpRequest::METHOD_POST, $post);
         
@@ -98,7 +99,7 @@ class RegisterControllerTest extends TestCaseController
     
     public function testSendInvalidPostToIndex() 
     {   
-        $post = $this->userData();
+        $post = $this->asset->getData();
         $post['email'] = 'teste';
         
         $this->dispatch('/cadastre-se', HttpRequest::METHOD_POST, $post);
@@ -116,6 +117,60 @@ class RegisterControllerTest extends TestCaseController
         
         $this->assertQuery('body form input[name="name"]');
         $this->assertQuery('body form input[name="email"]');
+    }
+    
+    public function testIfEditActionIsAccessible()
+    {
+        $this->dispatch('/editar-perfil/1', HttpRequest::METHOD_GET);
+        
+        $this->assertModuleName('User');
+        $this->assertControllerName('register');
+        $this->assertActionName('edit');
+        $this->assertResponseStatusCode(200);
+        $this->assertMatchedRouteName('editar-perfil');
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Parâmetro inválido recebido
+     */
+    public function testIfEditActionIsThrowingExceptionIfDontReceiveParams()
+    {
+        $this->dispatch('/editar-perfil/', HttpRequest::METHOD_GET, array('id' => null));
+    }
+    
+    public function testIfIsObtainingExistentUser()
+    {
+        $this->dispatch('/editar-perfil/1', HttpRequest::METHOD_GET, array('id' => 1));
+        
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('User');
+        $this->assertControllerName('register');
+        $this->assertActionName('edit');
+        $this->assertMatchedRouteName('editar-perfil');
+    }
+    
+    public function testIfEditIsSavingAsExpected()
+    {       
+        $this->dispatch('/editar-perfil/1', HttpRequest::METHOD_POST, $this->asset->getData());
+        
+        $this->assertModuleName('User');
+        $this->assertControllerName('register');
+        $this->assertActionName('edit');
+        $this->assertMatchedRouteName('editar-perfil');
+        $this->assertRedirectTo('/editar-perfil/1');
+        $this->assertResponseStatusCode(302);
+    }
+    
+    public function testIfEditIsDoingNothingOnInvalidMethodData()
+    {       
+        $this->dispatch('/editar-perfil/1', HttpRequest::METHOD_GET, $this->asset->getData());
+        
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('User');
+        $this->assertControllerName('register');
+        $this->assertActionName('edit');
+        $this->assertMatchedRouteName('editar-perfil');
     }
    
 }

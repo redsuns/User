@@ -32,6 +32,9 @@ class Module
                 'User\Service\User' => function($sm) {
                     return new \User\Service\User($sm->get('Doctrine\ORM\EntityManager'));
                 },
+                'User\Service\UserDetail' => function($sm) {
+                    return new \User\Service\UserDetail($sm->get('Doctrine\ORM\EntityManager'));
+                },        
                         
                 // Forms
                 'User\Form\Register' => function( $sm ) {

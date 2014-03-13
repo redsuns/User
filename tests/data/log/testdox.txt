@@ -4,6 +4,11 @@ UserControllerRegisterController
  [x] Send valid post to index
  [x] Send invalid post to index
  [x] If has inputs on view
+ [x] If edit action is accessible
+ [x] If edit action is throwing exception if dont receive params
+ [x] If is obtaining existent user
+ [x] If edit is saving as expected
+ [x] If edit is doing nothing on invalid method data
 
 UserEntityUserDetail
  [x] Class exists
@@ -20,6 +25,25 @@ UserEntityUser
  [x] If is setting data as expected
  [x] If is returning as array
  [x] If is returning as string
+
+UserFormEditProfile
+ [x] Exists class
+ [x] If class is a sub class of zend form
+ [x] Form fields
+ [x] Attributs are mirrored
+ [x] If complete data are valid
+ [x] If complete data are invalid
+ [x] If is rejecting not range length password
+ [x] If is accepting empty password as expected on edit
+ [x] If invalid data is returning messages
+ [x] If is requiring phone number
+ [x] If is requiring cpf
+ [x] If is requiring address
+ [x] If is requiring address number
+ [x] If is requiring district
+ [x] If is requiring city
+ [x] If is requiring state
+ [x] If is requiring cep
 
 UserFormRegister
  [x] Exists class
@@ -46,6 +70,11 @@ UserServiceUserDetail
  [x] If has method set user
  [x] If is throwing exception on receive an empty array as param
  [x] If is saving as expected
+ [x] If method parse details exists
+ [x] If parse details is returning any result
+ [x] If parse details is returning an array as result
+ [x] If method persist details exist
+ [x] If persist details is returning true
 
 UserServiceUser
  [x] Instance of
@@ -58,4 +87,12 @@ UserServiceUser
  [x] If has method inactivate profile
  [x] If inactivate is throwing exception on invalid id
  [x] If is inactivating as expected
+ [x] If method read exists
+ [x] If read method is throwing exception if dont receive params or empty params
+ [x] If read method is returning user object
+ [x] If method edit exists
+ [x] If is throwing exception on empty param
+ [x] If is editing without change password
+ [x] If is editing changing password
+ [x] If method parse password update
 

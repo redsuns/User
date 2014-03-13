@@ -4,18 +4,17 @@ namespace User\Form;
 
 use Zend\Form\Form;
 
-class Register extends Form
+class EditProfile extends Form
 {
-
-    protected $validator;
-
-    public function __construct()
+    
+    public function __construct() 
     {
-        parent::__construct('register');
-
+        parent::__construct('edit-profile');
+        
         $this->setAttribute('method', 'post');
-        $this->setInputFilter(new RegisterFilter());
-
+        $this->setInputFilter(new EditProfileFilter());
+        
+        
         $this->add(array(
             'type' => 'Zend\Form\Element\Hidden',
             'name' => 'id',
@@ -51,26 +50,13 @@ class Register extends Form
         $this->add(array(
             'type' => 'Zend\Form\Element\Password',
             'name' => 'password',
-            'required' => true,
+            'required' => false,
             'options' => array(
                 'type' => 'password',
                 'label' => 'Defina sua senha'
             ),
                 )
         );
-
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Password',
-            'name' => 'password_confirm',
-            'required' => true,
-            'options' => array(
-                'type' => 'password',
-                'label' => 'Confirme sua senha'
-            ),
-            'attributes' => array(
-                'id' => 'password_confirm',
-            )
-        ));
 
         $this->add(array(
             'name' => 'phone',
@@ -197,9 +183,10 @@ class Register extends Form
                 'type' => 'submit',
             ),
             'attributes' => array(
-                'value' => 'Realizar cadastro',
+                'value' => 'Alterar dados',
             )
         ));
+        
     }
     
 }

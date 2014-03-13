@@ -8,6 +8,7 @@ use Mockery;
 use User\Bootstrap;
 use User\Service\User as UserService;
 use User\Asset\UserAsset;
+use User\Asset\UserDetailAsset;
 
 /**
  * @group User
@@ -36,6 +37,12 @@ class UserTest extends ServiceTestCase
     
     public function emMock()
     {
+        $detailAsset = new UserDetailAsset();
+        
+        $userData = $this->asset->getData();
+        $user = new \User\Entity\User($userData);
+        $user->setDetail(array(0 => new \User\Entity\UserDetail($detailAsset->detailsToArray()))) ;
+        
         $entityManager = Mockery::mock('Doctrine\ORM\EntityManager');
         
         $entityManager->shouldReceive('count')->andReturn(1);
@@ -54,7 +61,7 @@ class UserTest extends ServiceTestCase
         $entityManager->shouldReceive('findAll')->andReturn(array(0 => new \User\Entity\User($this->asset->getData())));
         $entityManager->shouldReceive('findOneBy')
                         ->with(array('id' => 1))
-                        ->andReturn(new \User\Entity\User($this->asset->getData()));
+                        ->andReturn($user);
         
         return $entityManager;
     }
@@ -116,4 +123,62 @@ class UserTest extends ServiceTestCase
     {
         $this->assertTrue($this->service->inactivateProfile(1));
     }
+    
+    public function testIfMethodReadExists()
+    {
+        $this->assertTrue(method_exists($this->service, 'read'));
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Parâmetro inválido recebido
+     */
+    public function testIfReadMethodIsThrowingExceptionIfDontReceiveParamsOrEmptyParams()
+    {
+        $this->service->read(array());
+    }
+    
+    public function testIfReadMethodIsReturningUserObject()
+    {
+        $this->assertInstanceOf('User\Entity\User', $this->service->read(1));
+    }
+    
+    public function testIfMethodEditExists()
+    {
+        $this->assertTrue(method_exists($this->service, 'edit'));
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Nenhum dado recebido
+     */
+    public function testIfIsThrowingExceptionOnEmptyParam()
+    {
+        $this->assertTrue($this->service->edit(array()));
+    }
+    
+    public function testIfIsEditingWithoutChangePassword()
+    {
+        $data = $this->asset->getData();
+        $data['password'] = '';
+        $data['name'] = 'Editado';
+        unset($data['password_confirm']);
+        
+        $this->assertTrue($this->service->edit($data));
+    }
+    
+    public function testIfIsEditingChangingPassword()
+    {
+        $data = $this->asset->getData();
+        $data['name'] = 'Editado';
+        unset($data['password_confirm']);
+        
+        $this->assertTrue($this->service->edit($data));
+    }
+    
+    public function testIfMethodParsePasswordUpdate()
+    {
+        $this->assertTrue(method_exists($this->service, '_parsePasswordUpdate'));
+    }
+    
 }

@@ -80,13 +80,49 @@ class UserDetailTest extends ServiceTestCase
      */
     public function testIfIsThrowingExceptionOnReceiveAnEmptyArrayAsParam()
     {
-        $this->service->persistDetails(array());
+        $this->service->linkDetails(array());
     }
     
     public function testIfIsSavingAsExpected()
     {
-        $result = $this->service->setUser($this->getUserEntityData())->persistDetails($this->getData());
+        $result = $this->service->setUser($this->getUserEntityData())->linkDetails($this->getData());
         $this->assertTrue($result);
+    }
+    
+    public function testIfMethodParseDetailsExists()
+    {
+        $this->assertTrue(method_exists($this->service, 'parseDetails'));
+    }
+    
+    public function testIfParseDetailsIsReturningAnyResult()
+    {
+        $assetDetails = new \User\Asset\UserDetailAsset();
+        $details = $assetDetails->detailsToUser(new \User\Entity\User($this->asset->getData()));
+        
+        $result = $this->service->parseDetails($details);
+        $this->assertNotNull($result);
+    }
+    
+    public function testIfParseDetailsIsReturningAnArrayAsResult()
+    {
+        $assetDetails = new \User\Asset\UserDetailAsset();
+        $details = $assetDetails->detailsToUser(new \User\Entity\User($this->asset->getData()));
+        
+        $result = $this->service->parseDetails($details);
+        $this->assertInternalType('array', $result);
+    }
+    
+    public function testIfMethodPersistDetailsExist()
+    {
+        $this->assertTrue(method_exists($this->service, 'persistDetails'));
+    }
+    
+    public function testIfPersistDetailsIsReturningTrue()
+    {
+        $edited = $this->getData();
+        $details = array(0 => new UserDetailEntity(array('id' => 1, 'field' => 'phone', 'value' => $edited['phone'])));
+        
+        $this->assertTrue($this->service->persistDetails($details, $edited));
     }
     
 }

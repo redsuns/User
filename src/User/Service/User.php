@@ -16,7 +16,6 @@ class User extends AbstractService
         $this->entity = 'User\Entity\User';
     }
     
-    
     /**
      * 
      * @return int
@@ -32,6 +31,7 @@ class User extends AbstractService
     }
     
     /**
+     * Grava um novo usuário ou edita
      * 
      * @param array $data
      * @return boolean
@@ -49,24 +49,51 @@ class User extends AbstractService
             'password' => $data['password']
         );
         
-        if ( isset($data['id']) ) {
-            $userData['id'] = $data['id'];
-        }
-        
         $user = new UserEntity( $userData );
         
         $this->em->persist($user);
         
         unset($data['id'], $data['name'], $data['email'], $data['password'], $data['submit'], $data['password_confirm']);
-        
         $userDetail = new \User\Service\UserDetail($this->em);
-        $userDetail->setUser($user)->persistDetails($data);
+        $userDetail->setUser($user)->linkDetails($data);
         
         $this->em->flush();
         return true;
     }
     
     
+    public function edit( array $data )
+    {
+        if ( empty($data) ) {
+            throw new \InvalidArgumentException('Nenhum dado recebido');
+        }
+        
+        $user = $this->em->getRepository('User\Entity\User')->findOneBy(array('id' => $data['id']));
+
+        $user->setName($data['name'])
+             ->setEmail($data['email']);   
+
+        $this->_parsePasswordUpdate($data);
+        if ( isset($data['password']) && !empty($data['password']) ) {
+            $user->setPassword($data['password']);
+        }
+        
+        unset($data['id'], $data['name'], $data['email'], $data['password'], $data['submit'], $data['password_confirm']);
+        $userDetail = new \User\Service\UserDetail($this->em);
+        $userDetail->persistDetails($user->getDetail(), $data);
+        
+        $this->em->persist($user);
+        $this->em->flush();
+        
+        return true;
+    }
+    
+    /**
+     * 
+     * @param int $id
+     * @return boolean
+     * @throws \InvalidArgumentException
+     */
     public function inactivateProfile( $id = null )
     {
         if ( empty($id) ) {
@@ -81,5 +108,33 @@ class User extends AbstractService
         $this->em->flush();
         
         return true;
+    }
+    
+    /**
+     * 
+     * @param int $userId
+     * @return \User\Entity\User
+     * @throws \InvalidArgumentException
+     */
+    public function read( $userId )
+    {
+        if ( empty($userId) ) {
+            throw new \InvalidArgumentException('Parâmetro inválido recebido');
+        }
+        
+        return $this->em->getRepository($this->entity)->findOneBy(array('id' => $userId));
+    }
+    
+    /**
+     * 
+     * @param array $userData
+     */
+    protected function _parsePasswordUpdate( array &$data )
+    {
+        if ( isset($data['password']) ) {
+            if ( empty($data['password']) ) {
+                unset($data['password']);
+            }
+        }
     }
 }
