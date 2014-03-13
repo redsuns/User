@@ -1,0 +1,28 @@
+
+
+Code Coverage Report:       
+  2014-03-13 17:32:01       
+                            
+ Summary:                   
+  Classes: 34.78% (8/23)    
+  Methods: 58.70% (54/92)   
+  Lines:   44.43% (742/1670)
+
+\User\Controller::RegisterController
+  Methods:  66.67% ( 2/ 3)   Lines:  97.14% ( 34/ 35)
+\User\Entity::User
+  Methods: 100.00% (22/22)   Lines: 100.00% ( 38/ 38)
+\User\Entity::UserDetail
+  Methods: 100.00% (14/14)   Lines: 100.00% ( 23/ 23)
+\User\Form::EditProfile
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (111/111)
+\User\Form::EditProfileFilter
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (153/153)
+\User\Form::Register
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (119/119)
+\User\Form::RegisterFilter
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (174/174)
+\User\Service::User
+  Methods: 100.00% ( 7/ 7)   Lines: 100.00% ( 52/ 52)
+\User\Service::UserDetail
+  Methods: 100.00% ( 5/ 5)   Lines: 100.00% ( 30/ 30)
