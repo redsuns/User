@@ -10,7 +10,7 @@ use User\Entity\User;
 use Mockery;
 
 /**
- * @group Service
+ * @group ServiceAdmin
  */
 class RoleTest extends ServiceTestCase
 {

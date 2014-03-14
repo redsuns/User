@@ -12,7 +12,7 @@ class RegisterController extends BaseController
     {
         $form = $this->getServiceLocator()->get('User\Form\Register');
         $service = $this->getServiceLocator()->get('User\Service\User');
-         
+        
         $request = $this->getRequest();
         
         if ( $request->isPost() ) {

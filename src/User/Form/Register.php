@@ -14,6 +14,7 @@ class Register extends Form
         parent::__construct('register');
 
         $this->setAttribute('method', 'post');
+        $this->setAttribute('role', 'form');
         $this->setInputFilter(new RegisterFilter());
 
         $this->add(array(
@@ -31,6 +32,7 @@ class Register extends Form
             'attributes' => array(
                 'id' => 'nome',
                 'placeholder' => 'Informe seu nome completo',
+                'class' => 'form-control'
             )
         ));
 
@@ -43,7 +45,8 @@ class Register extends Form
             ),
             'attributes' => array(
                 'id' => 'email',
-                'placeholder' => 'Informe um email',
+                'placeholder' => 'Informe seu email',
+                'class' => 'form-control'
             )
         ));
 
@@ -56,6 +59,10 @@ class Register extends Form
                 'type' => 'password',
                 'label' => 'Defina sua senha'
             ),
+            'attributes' => array(
+                'class' => 'form-control',
+                'placeholder' => 'Crie sua senha'
+            )
                 )
         );
 
@@ -69,6 +76,8 @@ class Register extends Form
             ),
             'attributes' => array(
                 'id' => 'password_confirm',
+                'class' => 'form-control',
+                'placeholder' => 'Confirme sua senha'
             )
         ));
 
@@ -81,7 +90,8 @@ class Register extends Form
             ),
             'attributes' => array(
                 'id' => 'telefone',
-                'class' => 'telefone'
+                'class' => 'telefone form-control',
+                'placeholder' => 'Seu telefone principal'
             ),
         ));
 
@@ -94,7 +104,8 @@ class Register extends Form
             ),
             'attributes' => array(
                 'id' => 'cpf',
-                'class' => 'cpf'
+                'class' => 'cpf form-control',
+                'placeholder' => 'Informe seu CPF'
             ),
         ));
 
@@ -104,6 +115,10 @@ class Register extends Form
                 'type' => 'text',
                 'label' => 'RG'
             ),
+            'attributes' => array(
+                'class' => 'form-control',
+                'placeholder' => 'Seu RG (opcional)'
+            )
         ));
         
         $this->add(array(
@@ -115,7 +130,8 @@ class Register extends Form
             ),
             'attributes' => array(
                 'id' => 'address',
-                'class' => 'address'
+                'class' => 'address form-control',
+                'placeholder' => 'Rua Nome da Rua'
             ),
         ));
         
@@ -128,7 +144,8 @@ class Register extends Form
             ),
             'attributes' => array(
                 'id' => 'address_number',
-                'class' => 'address_number'
+                'class' => 'form-control',
+                'placeholder' => 'Informe o número'
             ),
         ));
         
@@ -140,7 +157,8 @@ class Register extends Form
             ),
             'attributes' => array(
                 'id' => 'address_complement',
-                'class' => 'address_complement'
+                'class' => 'form-control',
+                'placeholder' => 'Casa, Apartamento ... (opcional)'
             ),
         ));
         
@@ -153,7 +171,8 @@ class Register extends Form
             ),
             'attributes' => array(
                 'id' => 'district',
-                'class' => 'district'
+                'class' => 'form-control',
+                'placeholder' => 'Informe o bairro'
             ),
         ));
         
@@ -166,7 +185,8 @@ class Register extends Form
             ),
             'attributes' => array(
                 'id' => 'city',
-                'class' => 'city'
+                'class' => 'form-control',
+                'placeholder' => 'Informe a cidade'
             ),
         ));
         
@@ -174,6 +194,7 @@ class Register extends Form
         $states->setLabel('Estado');
         $statesList = array('-' => '-- Selecione --') + \Local\Data\BrazilianState::getList();
         $states->setValueOptions($statesList);
+        $states->setAttribute('class', 'form-control');
 
         $this->add($states);
         
@@ -186,7 +207,8 @@ class Register extends Form
             ),
             'attributes' => array(
                 'id' => 'cep',
-                'class' => 'cep'
+                'class' => 'cep form-control',
+                'placeholder' => 'Informe seu CEP'
             ),
         ));
 
@@ -198,6 +220,7 @@ class Register extends Form
             ),
             'attributes' => array(
                 'value' => 'Realizar cadastro',
+                'class' => 'btn btn-enviar-mensagem'
             )
         ));
     }

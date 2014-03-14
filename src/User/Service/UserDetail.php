@@ -42,14 +42,16 @@ class UserDetail extends AbstractService
         $underscoreToSeparator->setReplacementSeparator(' ');
         
         foreach($data as $field => $value) {
-            $detail = new Detail(array(
-                'user' => $this->user,
-                'field' => $field,
-                'value' => $value,
-                'label' => ucwords($underscoreToSeparator->filter($field))
-            ));
-            
-            $this->em->persist($detail);
+            if ( !empty($field) && !empty($value) ) {
+                $detail = new Detail(array(
+                    'user' => $this->user,
+                    'field' => $field,
+                    'value' => $value,
+                    'label' => ucwords($underscoreToSeparator->filter($field))
+                ));
+
+                $this->em->persist($detail);
+            }
         }
         
         return true;
