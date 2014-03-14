@@ -40,7 +40,7 @@ class ProfileControllerTest extends TestCaseController
         $userService = Mockery::mock('User\Service\User');
         $userService->shouldReceive('save')->andReturn(true);
         $userService->shouldReceive('edit')->andReturn(true);
-        $userService->shouldReceive('read')->with(1)->andReturn($userData);
+        $userService->shouldReceive('read')->andReturn($userData);
         
         
         $userDetailService = Mockery::mock('User\Service\UserDetail');
@@ -61,13 +61,13 @@ class ProfileControllerTest extends TestCaseController
     
     public function testIfEditActionIsAccessible()
     {
-        $this->dispatch('/editar-perfil/1', HttpRequest::METHOD_GET);
+        $this->dispatch('/meu-perfil/1', HttpRequest::METHOD_GET);
         
         $this->assertModuleName('User');
         $this->assertControllerName('profile');
         $this->assertActionName('index');
         $this->assertResponseStatusCode(200);
-        $this->assertMatchedRouteName('editar-perfil');
+        $this->assertMatchedRouteName('meu-perfil');
     }
     
     /**
@@ -76,40 +76,40 @@ class ProfileControllerTest extends TestCaseController
      */
     public function testIfEditActionIsThrowingExceptionIfDontReceiveParams()
     {
-        $this->dispatch('/editar-perfil/', HttpRequest::METHOD_GET, array('id' => null));
+        $this->dispatch('/meu-perfil/', HttpRequest::METHOD_GET, array('id' => null));
     }
     
     public function testIfIsObtainingExistentUser()
     {
-        $this->dispatch('/editar-perfil/1', HttpRequest::METHOD_GET, array('id' => 1));
+        $this->dispatch('/meu-perfil/1', HttpRequest::METHOD_GET, array('id' => 1));
         
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('User');
         $this->assertControllerName('profile');
         $this->assertActionName('index');
-        $this->assertMatchedRouteName('editar-perfil');
+        $this->assertMatchedRouteName('meu-perfil');
     }
     
     public function testIfEditIsSavingAsExpected()
     {       
-        $this->dispatch('/editar-perfil/1', HttpRequest::METHOD_POST, $this->asset->getData());
+        $this->dispatch('/meu-perfil/1', HttpRequest::METHOD_POST, $this->asset->getData());
         
         $this->assertModuleName('User');
         $this->assertControllerName('profile');
         $this->assertActionName('index');
-        $this->assertMatchedRouteName('editar-perfil');
-        $this->assertRedirectTo('/editar-perfil/1');
+        $this->assertMatchedRouteName('meu-perfil');
+        $this->assertRedirectTo('/meu-perfil/1');
         $this->assertResponseStatusCode(302);
     }
     
     public function testIfEditIsDoingNothingOnInvalidMethodData()
     {       
-        $this->dispatch('/editar-perfil/1', HttpRequest::METHOD_GET, $this->asset->getData());
+        $this->dispatch('/meu-perfil/1', HttpRequest::METHOD_GET, $this->asset->getData());
         
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('User');
         $this->assertControllerName('profile');
         $this->assertActionName('index');
-        $this->assertMatchedRouteName('editar-perfil');
+        $this->assertMatchedRouteName('meu-perfil');
     }
 }

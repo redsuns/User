@@ -11,6 +11,7 @@ class ProfileController extends BaseController
     
     public function indexAction()
     {
+        // Será alterado para usuário autenticado
         $userId = $this->params()->fromRoute('id', 0);
         
         if ( 0 == $userId ) {
@@ -31,7 +32,7 @@ class ProfileController extends BaseController
             
             if ( $form->isValid() ) {
                 $service->edit($form->getData());
-                return $this->redirect()->toRoute('editar-perfil', array('action' => 'edit', 'id' => $user->getId()));
+                return $this->redirect()->toRoute('meu-perfil', array('id' => $user->getId()));
             }
         }
         

@@ -69,8 +69,8 @@ class EditProfileFilter extends InputFilter
                     'name' => 'StringLength',
                     'options' => array('encoding' => 'UTF-8', 'min' => 8, 'max' => 16,
                         'messages' => array(
-                            'stringLengthTooShort' => 'O campo senha deve ter no mínimo 8 caracteres e no máximo 16 caracteres',
-                            'stringLengthTooLong' => 'O campo senha deve ter no mínimo 8 caracteres e no máximo 16 caracteres'),)
+                            'stringLengthTooShort' => 'A senha deve ter entre 8 e 16 caracteres',
+                            'stringLengthTooLong' => 'A senha deve ter entre 8 e 16 caracteres'),)
                 ),
             )
         ));

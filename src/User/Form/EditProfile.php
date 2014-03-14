@@ -9,7 +9,7 @@ class EditProfile extends Form
     
     public function __construct() 
     {
-        parent::__construct('edit-profile');
+        parent::__construct('my-profile');
         
         $this->setAttribute('method', 'post');
         $this->setInputFilter(new EditProfileFilter());
@@ -30,6 +30,7 @@ class EditProfile extends Form
             'attributes' => array(
                 'id' => 'nome',
                 'placeholder' => 'Informe seu nome completo',
+                'class' => 'form-control'
             )
         ));
 
@@ -42,7 +43,8 @@ class EditProfile extends Form
             ),
             'attributes' => array(
                 'id' => 'email',
-                'placeholder' => 'Informe um email',
+                'placeholder' => 'Informe seu email',
+                'class' => 'form-control'
             )
         ));
 
@@ -50,11 +52,16 @@ class EditProfile extends Form
         $this->add(array(
             'type' => 'Zend\Form\Element\Password',
             'name' => 'password',
-            'required' => false,
+            'required' => true,
             'options' => array(
                 'type' => 'password',
-                'label' => 'Defina sua senha'
+                'label' => 'Redefinição de senha'
             ),
+            'attributes' => array(
+                'class' => 'form-control',
+                'placeholder' => 'Se desejar, crie uma nova senha',
+                'id' => 'password'
+            )
                 )
         );
 
@@ -67,7 +74,8 @@ class EditProfile extends Form
             ),
             'attributes' => array(
                 'id' => 'telefone',
-                'class' => 'telefone'
+                'class' => 'telefone form-control',
+                'placeholder' => 'Seu telefone principal'
             ),
         ));
 
@@ -80,15 +88,8 @@ class EditProfile extends Form
             ),
             'attributes' => array(
                 'id' => 'cpf',
-                'class' => 'cpf'
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'rg',
-            'options' => array(
-                'type' => 'text',
-                'label' => 'RG'
+                'class' => 'cpf form-control',
+                'placeholder' => 'Informe seu CPF'
             ),
         ));
         
@@ -101,7 +102,8 @@ class EditProfile extends Form
             ),
             'attributes' => array(
                 'id' => 'address',
-                'class' => 'address'
+                'class' => 'address form-control',
+                'placeholder' => 'Rua Nome da Rua'
             ),
         ));
         
@@ -114,7 +116,8 @@ class EditProfile extends Form
             ),
             'attributes' => array(
                 'id' => 'address_number',
-                'class' => 'address_number'
+                'class' => 'form-control',
+                'placeholder' => 'Informe o número'
             ),
         ));
         
@@ -126,7 +129,8 @@ class EditProfile extends Form
             ),
             'attributes' => array(
                 'id' => 'address_complement',
-                'class' => 'address_complement'
+                'class' => 'form-control',
+                'placeholder' => 'Casa, Apartamento ... (opcional)'
             ),
         ));
         
@@ -139,7 +143,8 @@ class EditProfile extends Form
             ),
             'attributes' => array(
                 'id' => 'district',
-                'class' => 'district'
+                'class' => 'form-control',
+                'placeholder' => 'Informe o bairro'
             ),
         ));
         
@@ -152,14 +157,15 @@ class EditProfile extends Form
             ),
             'attributes' => array(
                 'id' => 'city',
-                'class' => 'city'
+                'class' => 'form-control',
+                'placeholder' => 'Informe a cidade'
             ),
         ));
         
         $states = new \Zend\Form\Element\Select('state');
         $states->setLabel('Estado');
         $statesList = array('-' => '-- Selecione --') + \Local\Data\BrazilianState::getList();
-        $states->setValueOptions($statesList);
+        $states->setValueOptions($statesList)->setAttribute('class', 'form-control')->setAttribute('id', 'state');
 
         $this->add($states);
         
@@ -172,7 +178,8 @@ class EditProfile extends Form
             ),
             'attributes' => array(
                 'id' => 'cep',
-                'class' => 'cep'
+                'class' => 'cep form-control',
+                'placeholder' => 'Informe seu CEP'
             ),
         ));
 
@@ -183,7 +190,8 @@ class EditProfile extends Form
                 'type' => 'submit',
             ),
             'attributes' => array(
-                'value' => 'Alterar dados',
+                'value' => 'Editar',
+                'class' => 'btn btn-enviar-mensagem',
             )
         ));
         

@@ -1,12 +1,12 @@
 
 
 Code Coverage Report:       
-  2014-03-14 14:01:11       
+  2014-03-14 15:33:15       
                             
  Summary:                   
   Classes: 37.50% (9/24)    
   Methods: 58.70% (54/92)   
-  Lines:   45.15% (764/1692)
+  Lines:   45.25% (767/1695)
 
 \User\Controller::ProfileController
   Methods:  50.00% ( 1/ 2)   Lines:  96.00% ( 24/ 25)
@@ -17,11 +17,11 @@ Code Coverage Report:
 \User\Entity::UserDetail
   Methods: 100.00% (14/14)   Lines: 100.00% ( 23/ 23)
 \User\Form::EditProfile
-  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (111/111)
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (121/121)
 \User\Form::EditProfileFilter
   Methods: 100.00% ( 1/ 1)   Lines: 100.00% (153/153)
 \User\Form::Register
-  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (139/139)
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (132/132)
 \User\Form::RegisterFilter
   Methods: 100.00% ( 1/ 1)   Lines: 100.00% (174/174)
 \User\Service::User

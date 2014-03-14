@@ -25,10 +25,10 @@ return array(
                     )
                 )
             ),
-            'editar-perfil' => array(
+            'meu-perfil' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/editar-perfil/[:id]',
+                    'route' => '/meu-perfil/[:id]',
                     'constraints' => array(
                         'id' => '[0-9]+'
                     ),

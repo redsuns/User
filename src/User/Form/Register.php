@@ -61,7 +61,8 @@ class Register extends Form
             ),
             'attributes' => array(
                 'class' => 'form-control',
-                'placeholder' => 'Crie sua senha'
+                'placeholder' => 'Crie sua senha',
+                'id' => 'password'
             )
                 )
         );
@@ -107,18 +108,6 @@ class Register extends Form
                 'class' => 'cpf form-control',
                 'placeholder' => 'Informe seu CPF'
             ),
-        ));
-
-        $this->add(array(
-            'name' => 'rg',
-            'options' => array(
-                'type' => 'text',
-                'label' => 'RG'
-            ),
-            'attributes' => array(
-                'class' => 'form-control',
-                'placeholder' => 'Seu RG (opcional)'
-            )
         ));
         
         $this->add(array(
@@ -193,9 +182,8 @@ class Register extends Form
         $states = new \Zend\Form\Element\Select('state');
         $states->setLabel('Estado');
         $statesList = array('-' => '-- Selecione --') + \Local\Data\BrazilianState::getList();
-        $states->setValueOptions($statesList);
-        $states->setAttribute('class', 'form-control');
-
+        $states->setValueOptions($statesList)->setAttribute('class', 'form-control')->setAttribute('id', 'state');
+       
         $this->add($states);
         
         $this->add(array(

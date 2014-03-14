@@ -61,7 +61,6 @@ class RegisterTest extends FormTestCase
             array('password_confirm'),
             array('phone'),
             array('cpf'),
-            array('rg'),
             array('address'),
             array('address_number'),
             array('address_complement'),
