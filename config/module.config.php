@@ -38,12 +38,23 @@ return array(
                     )
                 )
             ),
+            'login' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/login',
+                    'defaults' => array(
+                        'controller' => 'auth',
+                        'action' => 'index'
+                    )
+                )
+            ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
             'register' => 'User\Controller\RegisterController',
-            'profile' => 'User\Controller\ProfileController'
+            'profile' => 'User\Controller\ProfileController',
+            'auth' => 'User\Controller\AuthController',
         ),
     ),
     'service_manager' => array(
