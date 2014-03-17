@@ -1,34 +1,20 @@
 
 
 Code Coverage Report:       
-  2014-03-17 12:03:47       
+  2014-03-17 16:32:00       
                             
  Summary:                   
-  Classes: 39.29% (11/28)   
-  Methods: 55.88% (57/102)  
-  Lines:   46.86% (836/1784)
+  Classes:  7.14% (2/28)    
+  Methods: 27.45% (28/102)  
+  Lines:   16.83% (351/2085)
 
 \User\Controller::ProfileController
-  Methods:  50.00% ( 1/ 2)   Lines:  96.00% ( 24/ 25)
-\User\Controller::RegisterController
-  Methods: 100.00% ( 1/ 1)   Lines: 100.00% ( 10/ 10)
+  Methods:  50.00% ( 1/ 2)   Lines:  92.59% ( 25/ 27)
 \User\Entity::User
-  Methods: 100.00% (22/22)   Lines: 100.00% ( 38/ 38)
+  Methods:  95.45% (21/22)   Lines:  97.37% ( 37/ 38)
 \User\Entity::UserDetail
-  Methods: 100.00% (14/14)   Lines: 100.00% ( 23/ 23)
+  Methods:  28.57% ( 4/14)   Lines:  47.83% ( 11/ 23)
 \User\Form::EditProfile
   Methods: 100.00% ( 1/ 1)   Lines: 100.00% (121/121)
 \User\Form::EditProfileFilter
   Methods: 100.00% ( 1/ 1)   Lines: 100.00% (153/153)
-\User\Form::Login
-  Methods: 100.00% ( 1/ 1)   Lines: 100.00% ( 33/ 33)
-\User\Form::LoginFilter
-  Methods: 100.00% ( 1/ 1)   Lines: 100.00% ( 27/ 27)
-\User\Form::Register
-  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (132/132)
-\User\Form::RegisterFilter
-  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (174/174)
-\User\Service::User
-  Methods: 100.00% ( 8/ 8)   Lines: 100.00% ( 61/ 61)
-\User\Service::UserDetail
-  Methods: 100.00% ( 5/ 5)   Lines: 100.00% ( 32/ 32)

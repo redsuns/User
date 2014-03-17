@@ -28,7 +28,7 @@
         <include>
 <!--            <group>Service</group>
             <group>Entity</group>-->
-            <group>User</group>
+            <group>Controller</group>
         </include>
     </groups>
 

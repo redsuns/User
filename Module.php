@@ -34,12 +34,22 @@ class Module
                 },
                 'User\Service\UserDetail' => function($sm) {
                     return new \User\Service\UserDetail($sm->get('Doctrine\ORM\EntityManager'));
-                },        
+                },
+                        
+                //Adapters 
+                'User\Auth\Adapter' => function($sm) {
+                    return new \User\Auth\Adapter($sm->get('Doctrine\ORM\EntityManager'));
+                },
                         
                 // Forms
                 'User\Form\Register' => function( $sm ) {
                     return new \User\Form\Register();
                 },
+                        
+                //Session
+                'SessionStorage' => function($sm) {
+                    return new \Zend\Authentication\Storage\Session('User');
+                }
             ),
         );
     }

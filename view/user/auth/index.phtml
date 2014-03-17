@@ -1,1 +1,61 @@
 <?php
+$form = $this->form;
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+
+<?php if ( $this->error ) : ?>
+    <div class="alert alert-danger">
+        Dados de login inválidos, por favor verifique.
+    </div>
+<?php endif; ?>
+
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <?php $erros = $form->get('email')->getMessages(); ?> 
+    <?php $numErros = count($erros); ?>
+    <div class="form-group <?php if ($numErros > 0) echo 'has-error has-feedback'; ?>">
+
+        <div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+            <?php echo $this->formLabel($form->get('email')) ?>
+            <div class="controls">
+                <?php echo $this->formInput($form->get('email')) ?>
+
+                <?php if ($numErros > 0): ?>
+                    <?php foreach ($erros as $chave => $msg): ?>
+                        <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+                    <?php endforeach; ?>
+                <?php endif; ?>  
+
+            </div>
+        </div>  
+    </div>
+</div>
+
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+    <?php $erros = $form->get('password')->getMessages(); ?> 
+    <?php $numErros = count($erros); ?>
+    <div class="form-group <?php if ($numErros > 0) echo 'has-error has-feedback'; ?>">
+        <div class="par control-group bloco <?php if ($numErros > 0): ?>error<?php endif; ?>">
+            <?php echo $this->formLabel($form->get('password')) ?>
+            <div class="controls">
+                <?php echo $this->formInput($form->get('password')) ?>
+
+                <?php if ($numErros > 0): ?>
+                    <?php foreach ($erros as $chave => $msg): ?>
+                        <small class="desc-erro help-inline"><?php echo $msg; ?></small>
+                        <?php if ($numErros > 1) echo '<br />'; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>  
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="form-group">
+            <?php echo $this->formSubmit($form->get('submit')); ?>
+        </div>
+    </div>
+
+    <?php echo $this->form()->closeTag(); ?> 

@@ -11,7 +11,7 @@ use User\Asset\UserAsset;
 use User\Asset\UserDetailAsset;
 
 /**
- * @group User
+ * @group Controller
  */
 class ProfileControllerTest extends TestCaseController
 {
@@ -47,10 +47,24 @@ class ProfileControllerTest extends TestCaseController
         $userDetailService->shouldReceive('read')->with(1)->andReturn($userData);
         $userDetailService->shouldReceive('parseDetails')->andReturn($detailAsset->detailsToArray());
         
+        $session = Mockery::mock('SessionStorage');
+        $session->shouldReceive('read')->andReturn($userData);
+        
         $serviceManager = $this->getApplicationServiceLocator();
         $serviceManager->setAllowOverride(true);
         $serviceManager->setService('User\Service\User', $userService);
         $serviceManager->setService('User\Service\UserDetail', $userDetailService);
+        $serviceManager->setService('SessionStorage', $session);
+    }
+    
+    public function smMockNotlogged()
+    {
+        $session = Mockery::mock('SessionStorage');
+        $session->shouldReceive('read')->andReturn(array());
+        
+        $serviceManager = $this->getApplicationServiceLocator();
+        $serviceManager->setAllowOverride(true);
+        $serviceManager->setService('SessionStorage', $session);
     }
     
     public function testIfInstanceOf()
@@ -59,25 +73,30 @@ class ProfileControllerTest extends TestCaseController
     }
     
     
-    public function testIfEditActionIsAccessible()
+    public function testIfIndexActionIsAccessible()
     {
-        $this->dispatch('/meu-perfil/1', HttpRequest::METHOD_GET);
+        $this->dispatch('/meu-perfil', HttpRequest::METHOD_GET);
         
         $this->assertModuleName('User');
         $this->assertControllerName('profile');
         $this->assertActionName('index');
         $this->assertResponseStatusCode(200);
-        $this->assertMatchedRouteName('meu-perfil');
+        $this->assertMatchedRouteName('home');
     }
     
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Parâmetro inválido recebido
-     */
-    public function testIfEditActionIsThrowingExceptionIfDontReceiveParams()
+    public function testIfIndexActionIsRedirectingIfNotLogged()
     {
-        $this->dispatch('/meu-perfil/', HttpRequest::METHOD_GET, array('id' => null));
+        $this->smMockNotlogged();
+        $this->dispatch('/meu-perfil', HttpRequest::METHOD_GET);
+        
+        $this->assertModuleName('User');
+        $this->assertControllerName('profile');
+        $this->assertActionName('index');
+        $this->assertResponseStatusCode(302);
+        $this->assertMatchedRouteName('home');
+        $this->assertRedirectTo('/login');
     }
+    
     
     public function testIfIsObtainingExistentUser()
     {
@@ -98,7 +117,7 @@ class ProfileControllerTest extends TestCaseController
         $this->assertControllerName('profile');
         $this->assertActionName('index');
         $this->assertMatchedRouteName('meu-perfil');
-        $this->assertRedirectTo('/meu-perfil/1');
+        $this->assertRedirectTo('/meu-perfil/');
         $this->assertResponseStatusCode(302);
     }
     

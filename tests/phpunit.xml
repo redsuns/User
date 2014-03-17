@@ -18,8 +18,7 @@
     </filter>
     <groups>
         <include>
-            <group>User</group>
+            <group>Controller</group>
         </include>
     </groups>
-    
 </phpunit>

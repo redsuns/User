@@ -9,20 +9,29 @@ use User\Form\EditProfile as EditForm;
 class ProfileController extends BaseController
 {
     
+    /**
+     * 
+     * @return \Zend\View\Model\ViewModel | HttpRedirect
+     * @throws \InvalidArgumentException
+     */
     public function indexAction()
     {
-        // Será alterado para usuário autenticado
-        $userId = $this->params()->fromRoute('id', 0);
+        $sessionStorage = $this->getServiceLocator()->get('SessionStorage');
+        if ( !$sessionStorage->read() ) {
+            return $this->redirect()->toRoute('login');
+        }
         
-        if ( 0 == $userId ) {
-            throw new \InvalidArgumentException('Parâmetro inválido recebido');
+        $user = $this->getServiceLocator()->get('User\Service\User')->read($sessionStorage->read()->getId());
+        
+        if ( !$user ) {
+            throw new \InvalidArgumentException('Sua sessão expirou');
         }
         
         $form = new EditForm();
         $service = $this->getServiceLocator()->get('User\Service\User');
-        $user = $service->read($userId);
         
         $dataToForm = $this->_setDataToForm($user);
+        
         $form->setData($dataToForm);
         
         $request = $this->getRequest();
@@ -32,7 +41,7 @@ class ProfileController extends BaseController
             
             if ( $form->isValid() ) {
                 $service->edit($form->getData());
-                return $this->redirect()->toRoute('meu-perfil', array('id' => $user->getId()));
+                return $this->redirect()->toRoute('meu-perfil');
             }
         }
         

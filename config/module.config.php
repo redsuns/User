@@ -10,8 +10,8 @@ return array(
                 'options' => array(
                     'route' => '/meu-perfil',
                     'defaults' => array(
-                        'controller' => 'user',
-                        'action' => 'profile'
+                        'controller' => 'profile',
+                        'action' => 'index'
                     ),
                 ),
             ),

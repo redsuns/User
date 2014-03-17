@@ -39,11 +39,11 @@ class Login extends Form
             'required' => true,
             'options' => array(
                 'type' => 'password',
-                'label' => 'Defina sua senha'
+                'label' => 'Informe sua senha'
             ),
             'attributes' => array(
                 'class' => 'form-control',
-                'placeholder' => 'Crie sua senha',
+                'placeholder' => 'Sua senha',
                 'id' => 'password'
             )
                 )
