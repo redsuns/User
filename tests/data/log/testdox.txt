@@ -1,3 +1,8 @@
+UserControllerAuthController
+ [x] If class exists
+ [x] Instance of
+ [x] If login is accessible
+
 UserControllerProfileController
  [x] If instance of
  [x] If edit action is accessible
@@ -47,6 +52,14 @@ UserFormEditProfile
  [x] If is requiring city
  [x] If is requiring state
  [x] If is requiring cep
+
+UserFormLogin
+ [x] Exists class
+ [x] If class is a sub class of zend form
+ [x] Form fields
+ [x] Attributs are mirrored
+ [x] If complete data are valid
+ [x] If complete data are invalid
 
 UserFormRegister
  [x] Exists class
@@ -98,4 +111,8 @@ UserServiceUser
  [x] If is editing without change password
  [x] If is editing changing password
  [x] If method parse password update
+ [x] If method find by email and password exists
+ [x] If valid data is passing
+ [x] If invalid password is rejecting login
+ [x] If invlid email is rejecting login
 

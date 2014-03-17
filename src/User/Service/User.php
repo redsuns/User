@@ -5,6 +5,7 @@ namespace User\Service;
 use Doctrine\ORM\EntityManager;
 use Base\Service\AbstractService;
 use User\Entity\User as UserEntity;
+use Zend\Crypt\Key\Derivation\Pbkdf2;
 
 class User extends AbstractService
 {
@@ -123,6 +124,28 @@ class User extends AbstractService
         }
         
         return $this->em->getRepository($this->entity)->findOneBy(array('id' => $userId));
+    }
+    
+    /**
+     * 
+     * @param string $email
+     * @param string $password
+     * @return boolean
+     */
+    public function findByEmailAndPassword( $email, $password )
+    {
+        $user = $this->em->getRepository($this->entity)->findOneBy(array('email' => $email));
+        
+        if ( $user ) {
+            $salt = $user->getSalt();
+            $passwordHash = base64_encode(Pbkdf2::calc('sha256', $password, $salt, 10000, strlen($password*2)));
+            
+            if ( $passwordHash == $user->getPassword() ) {
+                return $user;
+            } 
+        }
+        
+        return false;
     }
     
     /**

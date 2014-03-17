@@ -62,6 +62,12 @@ class UserTest extends ServiceTestCase
         $entityManager->shouldReceive('findOneBy')
                         ->with(array('id' => 1))
                         ->andReturn($user);
+        $entityManager->shouldReceive('findOneBy')
+                        ->with(array('email' => $userData['email']))
+                        ->andReturn($user);
+        $entityManager->shouldReceive('findOneBy')
+                        ->with(array('email' => 'teste@novo.com'))
+                        ->andReturn(false);
         
         return $entityManager;
     }
@@ -179,6 +185,35 @@ class UserTest extends ServiceTestCase
     public function testIfMethodParsePasswordUpdate()
     {
         $this->assertTrue(method_exists($this->service, '_parsePasswordUpdate'));
+    }
+    
+    public function testIfMethodFindByEmailAndPasswordExists()
+    {
+        $this->assertTrue(method_exists($this->service, 'findByEmailAndPassword'));
+    }
+    
+    public function testIfValidDataIsPassing()
+    {
+        $data = $this->asset->getData();
+        
+        $result = $this->service->findByEmailAndPassword($data['email'], $data['password']);
+        $this->assertNotNull($result);
+    }
+    
+    public function testIfInvalidPasswordIsRejectingLogin()
+    {
+        $data = $this->asset->getData();
+        
+        $result = $this->service->findByEmailAndPassword($data['email'], 123);
+        $this->assertFalse($result);
+    }
+    
+    public function testIfInvlidEmailIsRejectingLogin()
+    {
+        $data = $this->asset->getData();
+        
+        $result = $this->service->findByEmailAndPassword('teste@novo.com', 123);
+        $this->assertFalse($result);
     }
     
 }

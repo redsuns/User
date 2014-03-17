@@ -5,7 +5,7 @@ namespace User\Form;
 use Base\Form\FormTestCase;
 
 /**
- * @group Login
+ * @group User
  */
 class LoginTest extends FormTestCase
 {

@@ -6,7 +6,7 @@ use Base\Controller\TestCaseController;
 use User\Bootstrap;
 
 /**
- * @group Login
+ * @group User
  */
 class AuthControllerTest extends TestCaseController
 {
