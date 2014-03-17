@@ -11,7 +11,7 @@ use User\Asset\UserAsset;
 use User\Asset\UserDetailAsset;
 
 /**
- * @group User
+ * @group UserService
  */
 class UserTest extends ServiceTestCase
 {
@@ -41,7 +41,7 @@ class UserTest extends ServiceTestCase
         
         $userData = $this->asset->getData();
         $user = new \User\Entity\User($userData);
-        $user->setDetail(array(0 => new \User\Entity\UserDetail($detailAsset->detailsToArray()))) ;
+        $user->setDetails(array(0 => new \User\Entity\UserDetail($detailAsset->detailsToArray()))) ;
         
         $entityManager = Mockery::mock('Doctrine\ORM\EntityManager');
         

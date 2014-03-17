@@ -68,9 +68,9 @@ class User
     protected $modified;
     
     /**
-     * @ORM\OneToMany(targetEntity="UserDetail", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserDetail", mappedBy="user", cascade={"all"}, orphanRemoval=true)
      */
-    protected $detail;
+    protected $details;
     
 
     
@@ -104,9 +104,9 @@ class User
         return $this->status;
     }
 
-    public function getDetail()
+    public function getDetails()
     {
-        return $this->detail;
+        return $this->details;
     }
 
     public function getCreated()
@@ -167,9 +167,9 @@ class User
         return $this;
     }
 
-    public function setDetail($detail)
+    public function setDetails(array $details)
     {
-        $this->detail = $detail;
+        $this->details = $details;
         return $this;
     }
 

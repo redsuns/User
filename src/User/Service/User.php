@@ -52,12 +52,14 @@ class User extends AbstractService
         
         $user = new UserEntity( $userData );
         
-        $this->em->persist($user);
         
         unset($data['id'], $data['name'], $data['email'], $data['password'], $data['submit'], $data['password_confirm']);
         $userDetail = new \User\Service\UserDetail($this->em);
-        $userDetail->setUser($user)->linkDetails($data);
+        $details = $userDetail->setUser($user)->linkDetails($data);
         
+        $user->setDetails($details);
+        
+        $this->em->persist($user);
         $this->em->flush();
         return true;
     }
@@ -81,7 +83,7 @@ class User extends AbstractService
         
         unset($data['id'], $data['name'], $data['email'], $data['password'], $data['submit'], $data['password_confirm']);
         $userDetail = new \User\Service\UserDetail($this->em);
-        $userDetail->persistDetails($user->getDetail(), $data);
+        $userDetail->persistDetails($user->getDetails(), $data);
         
         $this->em->persist($user);
         $this->em->flush();

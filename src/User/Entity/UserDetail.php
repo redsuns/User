@@ -54,7 +54,7 @@ class UserDetail
     protected $modified;
     
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="detail", cascade="persist")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="detail", cascade={"persist", "merge", "refresh"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
