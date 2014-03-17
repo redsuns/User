@@ -11,7 +11,7 @@ use User\Asset\UserAsset;
 use User\Asset\UserDetailAsset;
 
 /**
- * @group UserService
+ * @group User
  */
 class UserTest extends ServiceTestCase
 {

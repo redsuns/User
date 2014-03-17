@@ -49,8 +49,7 @@ class ProfileController extends BaseController
         $arrayUser = $user->toArray();
         $userDetailsService = $this->getServiceLocator()->get('User\Service\UserDetail');
         
-        $userDetails = $userDetailsService->parseDetails($arrayUser['detail']);
-        
+        $userDetails = $userDetailsService->parseDetails($arrayUser['details']);
         
         $userData = array(
             'id' => $arrayUser['id'],

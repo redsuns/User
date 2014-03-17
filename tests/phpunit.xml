@@ -18,7 +18,7 @@
     </filter>
     <groups>
         <include>
-            <group>UserService</group>
+            <group>User</group>
         </include>
     </groups>
     

@@ -35,7 +35,7 @@ class ProfileControllerTest extends TestCaseController
         $userData = new \User\Entity\User($this->asset->getData());
         $details = $detailAsset->detailsToUser($userData);
         
-        $userData->setDetail($details);
+        $userData->setDetails($details);
         
         $userService = Mockery::mock('User\Service\User');
         $userService->shouldReceive('save')->andReturn(true);

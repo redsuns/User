@@ -86,7 +86,8 @@ class UserDetailTest extends ServiceTestCase
     public function testIfIsSavingAsExpected()
     {
         $result = $this->service->setUser($this->getUserEntityData())->linkDetails($this->getData());
-        $this->assertTrue($result);
+        $this->assertNotNull($result);
+        $this->assertInternalType('array', $result);
     }
     
     public function testIfMethodParseDetailsExists()
