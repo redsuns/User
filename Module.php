@@ -2,7 +2,10 @@
 
 namespace User;
 
-use User\Service\User as ServiceUser;
+use Zend\ModuleManager\ModuleManager,
+    Zend\Authentication\AuthenticationService,
+    Zend\Session\Storage\SessionStorage;
+
 
 class Module
 {
@@ -50,7 +53,7 @@ class Module
                 'SessionStorage' => function($sm) {
                     return new \Zend\Authentication\Storage\Session('User');
                 }
-            ),
+            ),        
         );
     }
 
@@ -58,5 +61,5 @@ class Module
     {
         return array();
     }
-
+    
 }

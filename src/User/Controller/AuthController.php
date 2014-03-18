@@ -51,4 +51,17 @@ class AuthController extends BaseController
         return $this->renderView(array('form' => $form, 'error' => $error));
     }
     
+    /**
+     * 
+     * @return HttpRedirect
+     */
+    public function logoutAction()
+    {
+        $auth = new AuthenticationService();
+        $auth->setStorage(new SessionStorage('User'));
+        $auth->clearIdentity();
+        
+        return $this->redirect()->toRoute('login');
+    }
+    
 }

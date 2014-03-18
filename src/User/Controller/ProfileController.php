@@ -45,7 +45,7 @@ class ProfileController extends BaseController
             }
         }
         
-        return $this->renderView(array('form' => $form));
+        return $this->renderView(array('form' => $form, 'user' => $user));
     }
     
     /**

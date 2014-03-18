@@ -48,6 +48,16 @@ return array(
                     )
                 )
             ),
+            'logout' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/logout',
+                    'defaults' => array(
+                        'controller' => 'auth',
+                        'action' => 'logout'
+                    )
+                ),
+            )
         ),
     ),
     'controllers' => array(
